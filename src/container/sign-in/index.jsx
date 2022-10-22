@@ -46,7 +46,7 @@ const SignIn = () => {
                       <p className='mb-0'>Enter your email and password to sign in</p>
                     </div>
                     <div className='flex-auto p-6'>
-                      <form onSubmit={handleSubmit} role='htmlForm'>
+                      <form onSubmit={handleSubmit}>
                         <label className='mb-2 ml-1 font-bold text-xs text-slate-700'>Email</label>
                         <div className='mb-4'>
                           <input
