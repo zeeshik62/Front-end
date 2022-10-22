@@ -1,5 +1,5 @@
 export const routes = {
-    usersCard: "/",
+    usersCard: "/splash-screen",
     login: "/login",
     register: "/register"
 

@@ -1,6 +1,7 @@
-import './App.css';
-import AppRoutes from './routes';
-import { ToastContainer } from "react-toastify"
+import "./App.css";
+import AppRoutes from "./routes";
+import { ToastContainer } from "react-toastify";
+
 function App() {
   return (
     <>
@@ -18,8 +19,7 @@ function App() {
       />
       <AppRoutes />
     </>
-  )
-
+  );
 }
 
 export default App;
