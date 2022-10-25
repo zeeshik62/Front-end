@@ -1,12 +1,15 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { routes } from "../../utils/config";
 import bg from "../../assets/img/curved6.jpg";
 import { useFormik } from "formik";
 import { SignInSchema } from "./sign-in-schema";
 import { login } from "../../services/http-client";
 import { toast } from "react-toastify";
+import { sls, memoryStrings } from "../../utils";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   const initialValues = {
     email: "",
@@ -21,7 +24,24 @@ const SignIn = () => {
         login({
           values,
           cbSuccess: (data) => {
-            console.log(data);
+            console.log("🚀 ~ file: index.jsx ~ line 27 ~ SignIn ~ data", data);
+
+            if (data.userType === "supervisor") {
+              sls.encode(memoryStrings.authorization, data.token);
+              navigate(routes.supervisor);
+            }
+            if (data.userType === "Organizer") {
+              sls.encode(memoryStrings.authorization, data.token);
+              navigate(routes.organizer);
+            }
+            if (data.userType === "HOD") {
+              sls.encode(memoryStrings.authorization, data.token);
+              navigate(routes.hod);
+            }
+            if (data.userType === "Student") {
+              sls.encode(memoryStrings.authorization, data.token);
+              navigate(routes.student);
+            }
             toast.success(data.message);
           },
           cbFailure: (error) => {

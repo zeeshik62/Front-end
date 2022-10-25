@@ -1,9 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { routes } from "../../utils/config";
 import { useFormik } from "formik";
 import { SignUpSchema } from "./sign-up.schema";
 import { register } from "../../services/http-client";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 const SignUp = () => {
   const { state } = useLocation();
   const initialValues = {
@@ -20,19 +20,19 @@ const SignUp = () => {
         register({
           values,
           cbSuccess: (data) => {
-            console.log("data", data);
+            console.log("🚀 ~ file: index.jsx ~ line 24 ~ SignUp ~ data", data);
             toast.success(data.message);
+            // navigate(routes.login);
           },
           cbFailure: (error) => {
-            console.log(error);
-            toast.success(error.message);
+            toast.error(error.message);
           },
         });
       },
     });
+
   return (
     <div className="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-      <ToastContainer />
       <main className="mt-0 transition-all duration-200 ease-soft-in-out">
         <div className="bg-sign-up-pattern relative flex items-start pt- pb-56 m-4 overflow-hidden bg-center bg-cover min-h-50-screen rounded-xl">
           <span className="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-gray-900 to-slate-800 opacity-60"></span>
