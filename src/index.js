@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
 import "font-awesome/css/font-awesome.css"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
