@@ -20,16 +20,17 @@ const SignUp = () => {
       register({
         values,
         cbSuccess: (data) => {
-          console.log("data", data);
+          console.log("🚀 ~ file: index.jsx ~ line 24 ~ SignUp ~ data", data);
           toast.success(data.message);
+          // navigate(routes.login);
         },
         cbFailure: (error) => {
-          console.log(error);
-          toast.success(error.message);
+          toast.error(error.message);
         },
       });
     },
   });
+
   return (
     <div className='m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500'>
       <main className='mt-0 transition-all duration-200 ease-soft-in-out'>

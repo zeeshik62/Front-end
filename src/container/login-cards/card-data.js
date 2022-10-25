@@ -12,7 +12,7 @@ const cardData = [{
     description: "login Only for HOD"
 }, {
     id: 4,
-    title: "Faculty",
-    description: "login Only for Faculty"
+    title: "Supervisor",
+    description: "login Only for supervisor"
 },]
 export default cardData
