@@ -5,11 +5,10 @@ export const validationSchemaModel = Yup.object({
 
     projectName: Yup.string().required("Please enter your name"),
     descriptionType: Yup.string().required("Please choose option"),
-    description: Yup.string().required("Required"),
-    file: Yup.mixed().required('A file is required')
-        .test('fileFormat', 'PDF only', (value) => {
-            console.log(value); return value && ['application/pdf'].includes(value.type);
-        }),
+    //     file: Yup.mixed().required('A file is required')
+    //         .test('fileFormat', 'PDF only', (value) => {
+    //             console.log(value); return value && ['application/pdf'].includes(value.type);
+    //         }),
 });
     // const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
