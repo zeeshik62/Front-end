@@ -3,7 +3,13 @@ export const routes = {
     login: "/login",
     register: "/register",
     supervisor: "/supervisor",
-    organizer: "/organizer",
+    organizer: {
+        root: "/program-organizer",
+        projects: '/program-organizer/projects',
+        students: '/program-organizer/students',
+        addProject: '/program-organizer/add-project',
+        addStudent: '/program-organizer/add-students',
+    },
     hod: "/hod",
     student: "/student"
 

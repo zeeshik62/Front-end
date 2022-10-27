@@ -1,12 +1,20 @@
 import { Outlet } from "react-router-dom";
-import UpNav from "./up-nav";
+import SideBar from "./side-bar";
+import TopBar from "./top-bar";
 
 const Layout = () => {
   return (
-    <>
-      <UpNav />
-      <Outlet />
-    </>
+    <div className='w-full h-full'>
+      <div className='flex flex-no-wrap'>
+        <SideBar />
+        <div className='w-full'>
+          <TopBar />
+          <div className='container mx-auto py-4'>
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

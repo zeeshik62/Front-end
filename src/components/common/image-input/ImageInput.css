@@ -1,0 +1,22 @@
+.imageInput {
+    text-align: center;
+    background-color: #ecedf1;
+    border-radius: 15px;
+    height: 90px;
+    justify-content: center;
+    overflow: hidden;
+    width: 100px;
+    box-shadow: blue;
+}
+
+.imageInput i {
+    font-size: 2.5em;
+    position: relative;
+    top: calc(50% - 18px);
+}
+
+.imageInput img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
