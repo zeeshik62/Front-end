@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { settingsReducer, userReducer } from './slices'
+import { projectsReducer, settingsReducer, userReducer } from './slices'
 
 const store = configureStore({
     reducer: {
+        projects: projectsReducer,
         settings: settingsReducer,
         user: userReducer
     },

@@ -7,7 +7,7 @@ const Layout = () => {
     <div className='w-full h-full'>
       <div className='flex flex-no-wrap'>
         <SideBar />
-        <div className='w-full'>
+        <div className='w-full h-screen overflow-auto'>
           <TopBar />
           <div className='container mx-auto py-4'>
             <Outlet />

@@ -6,7 +6,7 @@ import SignUp from "../container/sign-up";
 import Layout from "../layout";
 import { routes } from "../utils/config";
 import { slice as userSlice } from "../store/slices/user";
-import { POAddProject, PODashboard, POProjects } from "../container/program-organizer";
+import { POAddProject, PODashboard, ProjectDetails, POProjects } from "../container/program-organizer";
 
 const AppRoutes = ({ isAuthorized }) => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const AppRoutes = ({ isAuthorized }) => {
           <Route path={routes.organizer.root} element={<PODashboard />} />
           <Route path={routes.organizer.projects} element={<POProjects />} />
           <Route path={routes.organizer.addProject} element={<POAddProject />} />
+          <Route path={routes.organizer.projectDetails} element={<ProjectDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
-// import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import 'react-toastify/dist/ReactToastify.css';
 

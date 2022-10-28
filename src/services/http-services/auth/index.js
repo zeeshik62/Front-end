@@ -1,4 +1,4 @@
-import { httpClient } from "../../utils"
+import { httpClient } from "../../../utils"
 
 export const register = async ({ values, cbSuccess, cbFailure }) => {
     try {

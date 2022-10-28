@@ -1,9 +1,13 @@
 import { MoonLoader } from "react-spinners";
 
-const FormButton = ({ loading, text }) => {
+const FormButton = ({ disabled, loading, text }) => {
   return (
     <div className='container-contact100-form-btn'>
-      <button className='contact100-form-btn hover:bg-gradient-to-tl from-blue-600 to-cyan-400' type='submit'>
+      <button
+        className='contact100-form-btn hover:bg-gradient-to-tl from-blue-600 to-cyan-400'
+        disabled={disabled}
+        type='submit'
+      >
         <span className='buttonLoader'>
           {text}
           {!loading ? (

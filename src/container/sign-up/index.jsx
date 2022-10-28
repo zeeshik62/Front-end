@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { currentUser, getURL, routes } from "../../utils/config";
 import { Formik } from "formik";
 import { validationSchema } from "./sign-up.schema";
-import { register } from "../../services/http-client";
+import { register } from "../../services/http-services";
 import { toast } from "react-toastify";
 import { AppLoader } from "../../components/common";
 import { useDispatch } from "react-redux";

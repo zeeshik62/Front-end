@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { currentUser, getURL, routes } from "../../utils/config";
 import { validationSchema } from "./sign-in-schema";
-import { login } from "../../services/http-client";
+import { login } from "../../services/http-services";
 import { sls, memoryStrings } from "../../utils";
 import { AppLoader } from "../../components/common";
 import bg from "../../assets/img/curved6.jpg";

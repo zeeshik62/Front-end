@@ -12,7 +12,8 @@ const Dropdown = ({
   title,
 }) => {
   return (
-    <div className='wrap-input100 border-0 bg1 rs1-wrap-input100'>
+    <div className='wrap-input100 border-0 bg1'>
+      {/* for shorter width rs1-wrap-input100 */}
       <p className='label-input100 my-1'>
         {title}
         <span className='ml-1'>{asterisk && "*"}</span>

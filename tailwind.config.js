@@ -5,7 +5,8 @@ module.exports = {
   ], theme: {
     extend: {
       colors: {
-        'light': '#f8f9fa'
+        'light': '#f8f9fa',
+        'app-color': '#818cf8'
       },
       backgroundImage: {
         'register-pattern': "url('/src/assets/img/curved14.jpg')",

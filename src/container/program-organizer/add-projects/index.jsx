@@ -1,20 +1,32 @@
 import { useState } from "react";
 import { Formik } from "formik";
-import { Dropdown, FormButton, ImageInput, InputField } from "../../../components/common";
+import { Dropdown, FormButton, InputField } from "../../../components/common";
 import { validationSchema } from "./validationSchema";
-import { getPhoto, options } from "./helper-methods";
+import { options } from "./helper-methods";
 import "./AddProjects.css";
+import FileUpload from "./file-upload";
+import { AddNewProject } from "../../../services/http-services/projects";
+import { toast } from "react-toastify";
 
 const AddProjects = () => {
-  const [state, setState] = useState({ developers: [], teamLeads: [], projectImage: undefined });
-  const [imageUri, setImageUri] = useState("");
-  const handleAddProject = (values) => {
-    console.log("handleSubmit", values);
+  const [imageUri, setImageUri] = useState(null);
+  const handleAddProject = (values, setSubmitting, resetForm) => {
+    AddNewProject({
+      values: { ...values, fileList: imageUri },
+      cbSuccess: () => {
+        setSubmitting(false);
+        setImageUri(null);
+        resetForm();
+        toast.success("project added");
+      },
+      cbFailure: (error) => {
+        toast.error(error);
+      },
+    });
   };
 
   return (
-    <>
-      <h1>Add Project</h1>
+    <div className='overflow-auto h-full'>
       <div className='container-contact100'>
         <div className='wrap-contact100'>
           <Formik
@@ -24,7 +36,9 @@ const AddProjects = () => {
               projectDescription: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(values) => handleAddProject(values)}
+            onSubmit={(values, { setSubmitting, resetForm }) =>
+              handleAddProject(values, setSubmitting, resetForm)
+            }
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <form className='contact100-form validate-form' onSubmit={handleSubmit}>
@@ -42,17 +56,20 @@ const AddProjects = () => {
                   asterisk={true}
                 />
 
-                <Dropdown
-                  asterisk={true}
-                  dName='des'
-                  name='stackName'
-                  multiSelect={false}
-                  handleChange={handleChange("stackName")}
-                  options={options}
-                  title='Select Stack name'
-                />
+                <div className='grid grid-cols-2 w-full gap-4'>
+                  <Dropdown
+                    asterisk={true}
+                    dName='des'
+                    name='stackName'
+                    multiSelect={false}
+                    handleChange={handleChange("stackName")}
+                    options={options}
+                    title='Select Stack name'
+                  />
 
-                <ImageInput getPhoto={getPhoto({ state, setImageUri, setState })} image={imageUri} />
+                  {/* <ImageInput getPhoto={getPhoto({ state, setImageUri, setState })} image={imageUri} /> */}
+                  <FileUpload imageFile={(e) => setImageUri(e)} />
+                </div>
 
                 <div
                   className='wrap-input100 validate-input bg0 rs1-alert-validate'
@@ -70,13 +87,13 @@ const AddProjects = () => {
                   </p>
                 </div>
 
-                <FormButton loading={isSubmitting} text='Add Project' />
+                <FormButton disabled={isSubmitting} loading={isSubmitting} text='Add Project' />
               </form>
             )}
           </Formik>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
