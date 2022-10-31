@@ -15,10 +15,23 @@ export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
         let { fileList, projectDescription, projectName, stackName } = values;
         const storageRef = ref(storage, `projectDocuments/${fileList.name}`)
         await uploadBytes(storageRef, fileList)
-        let imageSrc = await getDownloadURL(storageRef)
-        let addValue = { projectDescription, projectName, stackName, imageSrc };
+        // let imageSrc = await getDownloadURL(storageRef)
+        let addValue = { projectDescription, projectName, stackName, imageSrc: fileList.name };
         const { data } = await httpClient.post("projects/add-project", addValue)
         cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+
+export const fileURL = async ({ values, cbSuccess, cbFailure }) => {
+    try {
+        let { imagePath } = values;
+        const storageRef = ref(storage, `projectDocuments/${imagePath}`)
+        // await uploadBytes(storageRef, fileList)
+        let imageSrc = await getDownloadURL(storageRef)
+        let addValue = { ...values, imagePath: imageSrc };
+        cbSuccess(addValue);
     } catch (e) {
         cbFailure(e.message);
     }

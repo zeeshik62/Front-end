@@ -1,9 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { NoContent } from "../../../components/common";
 import NoProjects from "../../../assets/img/no-projects.png";
 import "./ProjectDetails.css";
+import { toast } from "react-toastify";
+import { fileURL } from "../../../services/http-services/projects";
 
 const ProjectDetails = () => {
   let { id } = useParams();
@@ -11,8 +13,21 @@ const ProjectDetails = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
-    setSelectedProject(allProjects.find((el) => el._id == id));
+    // setSelectedProject(allProjects.find((el) => el._id == id));
+    getFileURL();
   }, []);
+
+  const getFileURL = () => {
+    fileURL({
+      values: allProjects.find((el) => el._id == id),
+      cbSuccess: (data) => {
+        setSelectedProject(data);
+      },
+      cbFailure: (error) => {
+        toast.error(error);
+      },
+    });
+  };
 
   if (!allProjects) return <NoContent imgSrc={NoProjects} title='Something went wrong, try again' />;
 
@@ -68,6 +83,7 @@ const ProjectDetails = () => {
             </div>
           </div>
         </div>
+        <iframe width='100%' height={400} src={selectedProject?.imagePath}></iframe>
 
         {/* <FloatingButton icon='fa-trash' mainStyle='float-red' /> */}
       </div>
