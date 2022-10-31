@@ -20,15 +20,15 @@ const AddProjects = () => {
         toast.success("project added");
       },
       cbFailure: (error) => {
-        toast.error(error);
+        toast.error(error.message);
       },
     });
   };
 
   return (
-    <div className='overflow-auto h-full'>
-      <div className='container-contact100'>
-        <div className='wrap-contact100'>
+    <div className="overflow-auto h-full">
+      <div className="container-contact100">
+        <div className="wrap-contact100">
           <Formik
             initialValues={{
               projectName: "",
@@ -36,35 +36,46 @@ const AddProjects = () => {
               projectDescription: "",
             }}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting, resetForm }) =>
-              handleAddProject(values, setSubmitting, resetForm)
-            }
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              handleAddProject(values, setSubmitting, resetForm);
+            }}
           >
-            {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-              <form className='contact100-form validate-form' onSubmit={handleSubmit}>
-                <span className='contact100-form-title'>New Project</span>
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+            }) => (
+              <form
+                className="contact100-form validate-form"
+                onSubmit={handleSubmit}
+              >
+                <span className="contact100-form-title">New Project</span>
 
                 <InputField
-                  className='wrap-input100 border-0 validate-input bg1'
+                  className="wrap-input100 border-0 validate-input bg1"
                   handleChange={handleChange("projectName")}
                   errors={errors.projectName}
                   touched={touched.projectName}
-                  labelName='PROJECT NAME'
-                  placeholder='Enter Project Name'
-                  type='text'
-                  name='projectName'
+                  labelName="PROJECT NAME"
+                  placeholder="Enter Project Name"
+                  type="text"
+                  name="projectName"
                   asterisk={true}
                 />
 
-                <div className='grid grid-cols-2 w-full gap-4'>
+                <div className="grid grid-cols-2 w-full gap-4">
                   <Dropdown
                     asterisk={true}
-                    dName='des'
-                    name='stackName'
+                    dName="des"
+                    name="stackName"
                     multiSelect={false}
                     handleChange={handleChange("stackName")}
                     options={options}
-                    title='Select Stack name'
+                    title="Select Stack name"
                   />
 
                   {/* <ImageInput getPhoto={getPhoto({ state, setImageUri, setState })} image={imageUri} /> */}
@@ -72,22 +83,30 @@ const AddProjects = () => {
                 </div>
 
                 <div
-                  className='wrap-input100 validate-input bg0 rs1-alert-validate'
-                  data-validate='Please Type Your Message'
+                  className="wrap-input100 validate-input bg0 rs1-alert-validate"
+                  data-validate="Please Type Your Message"
                 >
-                  <span className='label-input100'>Project description (optional)</span>
+                  <span className="label-input100">
+                    Project description (optional)
+                  </span>
                   <textarea
-                    className='input100'
-                    name='projectDescription'
+                    className="input100"
+                    name="projectDescription"
                     onChange={handleChange("projectDescription")}
-                    placeholder='Your message here...'
+                    placeholder="Your message here..."
                   ></textarea>
                   <p style={{ color: "red" }}>
-                    {errors.description && touched.description && errors.description}
+                    {errors.description &&
+                      touched.description &&
+                      errors.description}
                   </p>
                 </div>
 
-                <FormButton disabled={isSubmitting} loading={isSubmitting} text='Add Project' />
+                <FormButton
+                  disabled={isSubmitting}
+                  loading={isSubmitting}
+                  text="Add Project"
+                />
               </form>
             )}
           </Formik>

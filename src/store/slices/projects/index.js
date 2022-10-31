@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 // Define the initial state
 const initialState = {
     allProjects: [],
+    showProject: []
 }
 
 // Delivery Changes slice
@@ -17,6 +18,10 @@ export const slice = createSlice({
         getProjects: (state) => {
             return state;
         },
+        showStudent: (state, action) => {
+            state.showProject = action.payload
+            return state;
+        }
     }
 })
 

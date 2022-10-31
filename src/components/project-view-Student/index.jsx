@@ -1,16 +1,22 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { NoContent } from "../../../components/common";
-import NoProjects from "../../../assets/img/no-projects.png";
-import "./ProjectDetails.css";
-
-import { fileURL } from "../../../services/http-services/projects";
+import { NoContent } from "../../components/common";
+import NoProjects from "../../assets/img/no-projects.png";
+import "../../container/program-organizer/project-details/ProjectDetails.css";
+import { fileURL } from "../../services/http-services/projects/index";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import ShowFileMOdel from "../show-file-model";
+import ApplyProjectsModel from "../show-apply-model";
 
-const ProjectDetails = () => {
+const ProjectViewStudent = () => {
+  const { showProject } = useSelector((state) => state.projects);
+  const [showModal, setShowModal] = useState(false);
+
+  const [showApplyModel, setShowApplyModel] = useState(false);
+
   let { id } = useParams();
-  const { allProjects } = useSelector((state) => state.projects);
 
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -20,7 +26,7 @@ const ProjectDetails = () => {
   }, []);
   const getFileURL = () => {
     fileURL({
-      values: allProjects.find((el) => el._id == id),
+      values: showProject.find((el) => el._id == id),
       cbSuccess: (data) => {
         setSelectedProject(data);
       },
@@ -29,13 +35,23 @@ const ProjectDetails = () => {
       },
     });
   };
-  if (!allProjects)
+  if (!showProject)
     return (
       <NoContent imgSrc={NoProjects} title="Something went wrong, try again" />
     );
 
   return (
     <>
+      {" "}
+      {showApplyModel ? (
+        <ApplyProjectsModel close={() => setShowApplyModel(false)} />
+      ) : null}
+      {showModal ? (
+        <ShowFileMOdel
+          file={selectedProject?.imagePath}
+          close={() => setShowModal(false)}
+        />
+      ) : null}
       <div className="row h-100">
         <div className="col-sm-8 my-auto">
           <div className="card">
@@ -58,17 +74,17 @@ const ProjectDetails = () => {
             </div>
             <div className="cardFooter">
               {/* <div>
-              <h6>Developer</h6>
-              <div className='footerItems'>
-                {selectedProject?.developers?.length !== 0 &&
-                  selectedProject?.developers.map((developer) => (
-                    <Fragment key={developer.email}>
-                      <p>{developer.name}</p>
-                      <p>{developer.email}</p>
-                    </Fragment>
-                  ))}
-              </div>
-            </div> */}
+            <h6>Developer</h6>
+            <div className='footerItems'>
+              {selectedProject?.developers?.length !== 0 &&
+                selectedProject?.developers.map((developer) => (
+                  <Fragment key={developer.email}>
+                    <p>{developer.name}</p>
+                    <p>{developer.email}</p>
+                  </Fragment>
+                ))}
+            </div>
+          </div> */}
               <div>
                 <h6>Supervisor</h6>
                 <div className="footerItems shadow-lg">
@@ -100,26 +116,29 @@ const ProjectDetails = () => {
                 </div>
               </div>
             </div>
-
             <div className="w-full">
               <div className="imageInput">
                 {/* <img src={allProjects.imgSrc} /> */}
-                <i className="fa fa-file-text-o fa-2x" aria-hidden="true"></i>
+                <i
+                  onClick={() => setShowModal(true)}
+                  className="fa fa-file-text-o fa-2x"
+                  aria-hidden="true"
+                ></i>
               </div>
+              <button
+                onCLick={() => setShowApplyModel(true)}
+                className="ml-10 mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+              >
+                Apply
+              </button>{" "}
             </div>
           </div>
 
           {/* <FloatingButton icon="fa-trash" mainStyle="float-red" /> */}
         </div>
-
-        <iframe
-          width={"100%"}
-          height={800}
-          src={selectedProject?.imagePath}
-        ></iframe>
       </div>
     </>
   );
 };
 
-export default ProjectDetails;
+export default ProjectViewStudent;

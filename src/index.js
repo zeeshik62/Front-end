@@ -5,6 +5,8 @@ import App from './App';
 import './index.css';
 import "font-awesome/css/font-awesome.css";
 import 'react-toastify/dist/ReactToastify.css';
+import "@react-pdf-viewer/core/lib/styles/index.css"
+import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
