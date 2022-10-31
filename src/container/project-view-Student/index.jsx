@@ -7,8 +7,8 @@ import "../../container/program-organizer/project-details/ProjectDetails.css";
 import { fileURL } from "../../services/http-services/projects/index";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import ShowFileMOdel from "../show-file-model";
-import ApplyProjectsModel from "../show-apply-model";
+import ShowFileMOdel from "../../components/show-file-model";
+import ApplyProjectsModel from "../../components/show-apply-model";
 
 const ProjectViewStudent = () => {
   const { showProject } = useSelector((state) => state.projects);

@@ -17,7 +17,8 @@ import StudentDas from "../container/program-student/student-dashboard";
 import PSDashboard from "../container/program-student/student-dashboard";
 import ShowProjects from "../container/program-student/show-projects";
 import ApplyProjects from "../container/program-student/apply-projects";
-import ProjectViewStudent from "../components/project-view-Student";
+import ProjectViewStudent from "../container/project-view-Student";
+// import ProjectViewStudent from "../components/project-view-Student";
 
 const AppRoutes = ({ isAuthorized }) => {
   const dispatch = useDispatch();
