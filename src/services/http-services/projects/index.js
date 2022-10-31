@@ -9,6 +9,14 @@ export const getAllProjects = async ({ cbSuccess, cbFailure }) => {
         cbFailure(e.message);
     }
 };
+export const getProject = async ({ cbSuccess, cbFailure }) => {
+    try {
+        const { data } = await httpClient.get('projects/')
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
 
 export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
     try {
@@ -23,7 +31,6 @@ export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
         cbFailure(e.message);
     }
 };
-
 export const fileURL = async ({ values, cbSuccess, cbFailure }) => {
     try {
         let { imagePath } = values;

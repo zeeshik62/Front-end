@@ -10,9 +10,17 @@ export const routes = {
         addProject: '/program-organizer/add-project',
         addStudent: '/program-organizer/add-students',
         projectDetails: '/program-organizer/projects/:id',
+
+    },
+    student: {
+        root: '/student',
+        showProjects: '/program-student/projects',
+        applyProjects: '/program-student/apply-project',
+        studentViewProjects: '/program-student/student-view-projects/:id',
+
+
     },
     hod: "/hod",
-    student: { root: "/student" }
 
 }
 
