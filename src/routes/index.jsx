@@ -6,17 +6,12 @@ import SignUp from "../container/sign-up";
 import Layout from "../layout";
 import { routes } from "../utils/config";
 import { slice as userSlice } from "../store/slices/user";
-import {
-  POAddProject,
-  PODashboard,
-  ProjectDetails,
-  POProjects,
-} from "../container/program-organizer";
+import { POAddProject, PODashboard, ProjectDetails, POProjects } from "../container/program-organizer";
 import LayoutStudent from "../layout/layout-student";
-import StudentDas from "../container/program-student/student-dashboard";
-import PSDashboard from "../container/program-student/student-dashboard";
-import ShowProjects from "../container/program-student/show-projects";
-import ApplyProjects from "../container/program-student/apply-projects";
+import StudentDas from "../container/students/dashboard";
+import PSDashboard from "../container/students/dashboard";
+import ShowProjects from "../container/students/projects";
+import ApplyProjects from "../container/students/apply-projects";
 import ProjectViewStudent from "../container/project-view-Student";
 // import ProjectViewStudent from "../components/project-view-Student";
 
@@ -34,29 +29,14 @@ const AppRoutes = ({ isAuthorized }) => {
         <Route element={<Layout />}>
           <Route path={routes.organizer.root} element={<PODashboard />} />
           <Route path={routes.organizer.projects} element={<POProjects />} />
-          <Route
-            path={routes.organizer.addProject}
-            element={<POAddProject />}
-          />
-          <Route
-            path={routes.organizer.projectDetails}
-            element={<ProjectDetails />}
-          />
+          <Route path={routes.organizer.addProject} element={<POAddProject />} />
+          <Route path={routes.organizer.projectDetails} element={<ProjectDetails />} />
         </Route>
         <Route element={<LayoutStudent />}>
           <Route path={routes.student.root} element={<PSDashboard />} />
-          <Route
-            path={routes.student.showProjects}
-            element={<ShowProjects />}
-          />
-          <Route
-            path={routes.student.applyProjects}
-            element={<ApplyProjects />}
-          />
-          <Route
-            path={routes.student.studentViewProjects}
-            element={<ProjectViewStudent />}
-          />
+          <Route path={routes.student.showProjects} element={<ShowProjects />} />
+          <Route path={routes.student.applyProjects} element={<ApplyProjects />} />
+          <Route path={routes.student.studentViewProjects} element={<ProjectViewStudent />} />
         </Route>
       </Routes>
     </BrowserRouter>

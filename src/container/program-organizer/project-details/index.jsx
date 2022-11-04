@@ -7,9 +7,6 @@ import "./ProjectDetails.css";
 import { toast } from "react-toastify";
 import { fileURL } from "../../../services/http-services/projects";
 
-import { fileURL } from "../../../services/http-services/projects";
-import { toast } from "react-toastify";
-
 const ProjectDetails = () => {
   let { id } = useParams();
   const { allProjects } = useSelector((state) => state.projects);
