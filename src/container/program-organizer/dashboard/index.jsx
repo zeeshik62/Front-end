@@ -118,19 +118,16 @@ const PODashboard = () => {
                   </div>
                   <div className='flex-none w-5/12 max-w-full px-3 my-auto text-right lg:w-1/2 lg:flex-none'>
                     <div className='relative pr-6 lg:float-right'>
-                      <a dropdown-trigger className='cursor-pointer' aria-expanded='false'>
+                      <a className='cursor-pointer' aria-expanded='false'>
                         <i className='fa fa-ellipsis-v text-slate-400'></i>
                       </a>
                       <p className='hidden transform-dropdown-show'></p>
 
-                      <ul
-                        dropdown-menu
-                        className="z-100 text-sm transform-dropdown shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 -ml-34 before:text-5.5 pointer-events-none absolute top-0 m-0 mt-2 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:top-0 before:right-7 before:left-auto before:z-40 before:text-white before:transition-all before:content-['\f0d8']"
-                      >
+                      <ul className="z-100 text-sm transform-dropdown shadow-soft-3xl duration-250 before:duration-350 before:font-awesome before:ease-soft min-w-44 -ml-34 before:text-5.5 pointer-events-none absolute top-0 m-0 mt-2 list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:top-0 before:right-7 before:left-auto before:z-40 before:text-white before:transition-all before:content-['\f0d8']">
                         <li className='relative'>
                           <a
                             className='py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300'
-                            href='javascript:;'
+                            href='#/'
                           >
                             Action
                           </a>
@@ -138,7 +135,7 @@ const PODashboard = () => {
                         <li className='relative'>
                           <a
                             className='py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300'
-                            href='javascript:;'
+                            href='#/'
                           >
                             Another action
                           </a>
@@ -146,7 +143,7 @@ const PODashboard = () => {
                         <li className='relative'>
                           <a
                             className='py-1.2 lg:ease-soft clear-both block w-full whitespace-nowrap rounded-lg border-0 bg-transparent px-4 text-left font-normal text-slate-500 lg:transition-colors lg:duration-300'
-                            href='javascript:;'
+                            href='#/'
                           >
                             Something else here
                           </a>
@@ -194,7 +191,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-b whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -213,7 +210,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -232,7 +229,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -251,7 +248,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -311,7 +308,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-b whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -334,7 +331,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -398,7 +395,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-b whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -421,7 +418,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -485,7 +482,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-b whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -508,7 +505,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -531,7 +528,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -554,7 +551,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -618,7 +615,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-b whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -682,7 +679,7 @@ const PODashboard = () => {
                         <td className='p-2 align-middle bg-transparent border-0 whitespace-nowrap'>
                           <div className='mt-2 avatar-group'>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'
@@ -705,7 +702,7 @@ const PODashboard = () => {
                               ></div>
                             </div>
                             <a
-                              href='javascript:;'
+                              href='#/'
                               className='relative z-20 inline-flex items-center justify-center w-6 h-6 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid rounded-full ease-soft-in-out text-xs hover:z-30'
                               data-target='tooltip_trigger'
                               data-placement='bottom'

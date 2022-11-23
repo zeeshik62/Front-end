@@ -27,14 +27,15 @@ const SignIn = () => {
 
   const handleLogin = (values) => {
     setLoading(true);
+    let data = { ...values, email: values.email.toLowerCase(), userType: currentUser(state.userType) };
     login({
-      values,
+      values: data,
       cbSuccess: (data) => {
         let decodedUser = jwt_decode(data.token);
         sls.encode(memoryStrings.authorization, data.token);
         dispatch(userSlice.actions.user(decodedUser));
-        navigate(getURL(data.userType));
         toast.success(data.message);
+        navigate(getURL(data.userType));
         setLoading(false);
       },
       cbFailure: (error) => {
@@ -46,7 +47,7 @@ const SignIn = () => {
   if (!state.userType) return navigate(routes.usersCard);
   return (
     <div className='m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500'>
-      {loading ? <AppLoader linkTitle='signing up' /> : null}
+      {loading ? <AppLoader linkTitle='signing in' /> : null}
       <main className='mt-0 transition-all duration-200 ease-soft-in-out'>
         <div className='relative flex items-center p-0 overflow-hidden bg-center bg-cover min-h-75-screen'>
           <div className='container z-10'>

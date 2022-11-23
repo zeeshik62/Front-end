@@ -5,21 +5,35 @@ import { slice as userSlice } from "../../store/slices/user";
 import { slice as settingsSlice } from "../../store/slices/settings";
 import { useNavigate } from "react-router-dom";
 import placeholder from "../../assets/icons/placeholder.png";
+import { logOut } from "../../services/http-services";
+import { toast } from "react-toastify";
 
 const TopBar = () => {
   const [profile, setProfile] = useState(false);
   const { user, settings } = useSelector((state) => state);
+  console.log("🚀 ~ file: index.jsx ~ line 14 ~ TopBar ~ user", user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    sls.remove(memoryStrings.authorization);
-    dispatch(userSlice.actions.resetUser());
-    navigate(routes.usersCard, { replace: true });
+    try {
+      logOut({
+        cbSuccess: () => {
+          sls.remove(memoryStrings.authorization);
+          dispatch(userSlice.actions.resetUser());
+          navigate(routes.usersCard, { replace: true });
+        },
+        cbFailure: (error) => {
+          toast.error(error);
+        },
+      });
+    } catch (error) {
+      toast.error(error);
+    }
   };
   return (
-    <nav className='h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-0'>
+    <nav className='h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative'>
       <div className='hidden lg:flex w-full pr-6'>
         <div className='w-full flex items-center pl-8 justify-end'>
           <div className='h-full w-20 flex items-center justify-center border-r mr-4'>
@@ -49,7 +63,7 @@ const TopBar = () => {
           >
             <div className='rounded-full'>
               {profile ? (
-                <ul className='p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16 '>
+                <ul className='p-2 border-r bg-white absolute rounded w-max right-0 space-y-2 shadow mt-16 z-10'>
                   <li className='flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center'>
                     <div className='flex items-center'>
                       <svg
@@ -102,7 +116,7 @@ const TopBar = () => {
               </div>
             </div>
             <div className='flex place-content-center justify-center'>
-              <div className='text-gray-800 text-sm ml-2 capitalize'>{user.user?.userName}</div>
+              <div className='text-gray-800 text-sm ml-2 capitalize'>{user.user?.name}</div>
               <div className='cursor-pointer text-gray-600'>
                 <svg
                   aria-haspopup='true'

@@ -1,6 +1,6 @@
 export const sidebarDataStudent = [
     {
-        id: 1, title: 'Dashboard', path: '/program-student', icon: <svg
+        id: 1, title: 'Dashboard', path: '/student', icon: <svg
             xmlns='http://www.w3.org/2000/svg'
             className='icon icon-tabler icon-tabler-grid'
             width={18}
@@ -20,7 +20,10 @@ export const sidebarDataStudent = [
         </svg>
     },
     {
-        id: 2, title: 'Projects', path: '/program-student/projects', icon: <svg
+        id: 2, title: 'Team Members', path: '/student/team-members', icon: <i className="fa fa-users" aria-hidden="true"></i>
+    },
+    {
+        id: 3, title: 'Projects', path: '/student/projects', icon: <svg
             xmlns='http://www.w3.org/2000/svg'
             className='icon icon-tabler icon-tabler-puzzle'
             width={18}
@@ -37,7 +40,7 @@ export const sidebarDataStudent = [
         </svg>
     },
     {
-        id: 3, title: 'Apply Projects', path: '/program-student/apply-project', icon: <svg
+        id: 4, title: 'Apply Projects', path: '/student/apply-project', icon: <svg
             className='icon icon-tabler icon-tabler-puzzle'
             width={18}
             height={18}
@@ -61,25 +64,6 @@ export const sidebarDataStudent = [
         </svg>
 
     },
-    // {
-    //     id: 4, title: 'Students', path: '/program-organizer/students', icon: <svg
-    //         xmlns='http://www.w3.org/2000/svg'
-    //         className='icon icon-tabler icon-tabler-code'
-    //         width={20}
-    //         height={20}
-    //         viewBox='0 0 24 24'
-    //         strokeWidth='1.5'
-    //         stroke='currentColor'
-    //         fill='none'
-    //         strokeLinecap='round'
-    //         strokeLinejoin='round'
-    //     >
-    //         <path stroke='none' d='M0 0h24v24H0z' />
-    //         <polyline points='7 8 3 12 7 16' />
-    //         <polyline points='17 8 21 12 17 16' />
-    //         <line x1={14} y1={4} x2={10} y2={20} />
-    //     </svg>
-    // },
     // {
     //     id: 5, title: 'Add Student', path: '/program-organizer/add-student', icon: <svg
     //         className='icon icon-tabler icon-tabler-puzzle'

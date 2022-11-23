@@ -1,10 +1,10 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { currentUser, getURL, routes } from "../../utils/config";
+import { currentUser, routes } from "../../utils/config";
 import { Formik } from "formik";
 import { validationSchema } from "./sign-up.schema";
 import { register } from "../../services/http-services";
 import { toast } from "react-toastify";
-import { AppLoader } from "../../components/common";
+import { AppLoader, Dropdown } from "../../components/common";
 import { useDispatch } from "react-redux";
 import { slice as userSlice } from "../../store/slices/user";
 import jwt_decode from "jwt-decode";
@@ -20,23 +20,35 @@ const SignUp = () => {
     userName: "",
     email: "",
     password: "",
+    section: "",
+    rollNum: "",
     userType: currentUser(state.userType),
   };
 
+  const options = [
+    { value: "BSCS", label: "BSCS" },
+    { value: "BSIT", label: "BSIT" },
+  ];
+
   const handleRegister = (values) => {
     setLoading(true);
+    let data = { ...values, email: values.email.toLowerCase() };
     register({
-      values,
+      values: data,
       cbSuccess: (data) => {
         let decodedUser = jwt_decode(data.token);
         toast.success(data.message);
         dispatch(userSlice.actions.user(decodedUser));
-        navigate(getURL(data.userType));
+        navigate(routes.login, {
+          state: {
+            userType: values.userType,
+          },
+        });
         setLoading(false);
       },
       cbFailure: (error) => {
+        toast.error(error);
         setLoading(false);
-        toast.error(error.message);
       },
     });
   };
@@ -151,6 +163,47 @@ const SignUp = () => {
                             </p>
                           ) : null}
                         </div>
+                        {currentUser(state.userType) === "Student" && (
+                          <>
+                            <div className='mb-4'>
+                              <input
+                                className='text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow'
+                                placeholder='enter roll number'
+                                aria-label='RollNum'
+                                aria-describedby='RollNum-addon'
+                                autoComplete='off'
+                                type='text'
+                                id='rollNum'
+                                name='rollNum'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.rollNum}
+                              />
+                              {errors.rollNum && touched.rollNum ? (
+                                <p style={{ color: "red" }} className='form-error text-xs mt-1'>
+                                  {errors.rollNum}
+                                </p>
+                              ) : null}
+                            </div>
+                            <div className='mb-4'>
+                              <Dropdown
+                                asterisk={true}
+                                id='section'
+                                name='section'
+                                disable={false}
+                                handleChange={handleChange("section")}
+                                multiSelect={false}
+                                options={options}
+                                title='Select section'
+                              />
+                              {errors.section && touched.section ? (
+                                <p style={{ color: "red" }} className='form-error text-xs mt-1'>
+                                  {errors.section}
+                                </p>
+                              ) : null}
+                            </div>
+                          </>
+                        )}
                         <div className='text-center'>
                           <button
                             className='inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 hover:border-slate-700 hover:bg-slate-700 hover:text-white'

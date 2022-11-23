@@ -14,11 +14,11 @@ export const routes = {
     },
     student: {
         root: '/student',
-        showProjects: '/program-student/projects',
-        applyProjects: '/program-student/apply-project',
-        studentViewProjects: '/program-student/student-view-projects/:id',
-
-
+        dashboard: '/student/dashboard',
+        showProjects: '/student/projects',
+        applyProjects: '/student/apply-project',
+        studentViewProjects: '/student/student-view-projects/:id',
+        teamMembers: '/student/team-members',
     },
     hod: "/hod",
 
@@ -41,6 +41,17 @@ export const getURL = (argument) => {
         "Program Organizer": routes.organizer.root,
         "Supervisor": routes.supervisor,
         "Student": routes.student.root
+    }
+    return userTypes[argument]
+
+}
+
+export const getApiURL = (argument) => {
+    const userTypes = {
+        "Head Of Department": routes.hod,
+        "Program Organizer": "/program-organizers",
+        "Supervisor": "/supervisors",
+        "Student": "/students"
     }
     return userTypes[argument]
 
