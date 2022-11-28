@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import TopBar from "../top-bar";
 import SideBarStudent from "./side-bar-student";
-import StudentTopBar from "./top-bar-student";
 
 const LayoutStudent = () => {
   return (

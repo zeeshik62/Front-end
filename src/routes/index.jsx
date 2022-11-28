@@ -10,8 +10,9 @@ import LayoutStudent from "../layout/layout-student";
 import PSDashboard from "../container/students/dashboard";
 import ShowProjects from "../container/students/projects";
 import ApplyProjects from "../container/students/apply-projects";
-import ProjectViewStudent from "../container/project-view-Student";
+import ProjectViewStudent from "../container/students/project-view-Student";
 import TeamMembers from "../container/students/teams";
+import Notifications from "../container/students/notifications";
 import { slice as userSlice } from "../store/slices/user";
 import jwt_decode from "jwt-decode";
 import { sls } from "../utils";
@@ -45,6 +46,7 @@ const AppRoutes = ({ isAuthorized }) => {
           <Route path={routes.student.applyProjects} element={<ApplyProjects />} />
           <Route path={routes.student.studentViewProjects} element={<ProjectViewStudent />} />
           <Route path={routes.student.teamMembers} element={<TeamMembers />} />
+          <Route path={routes.student.notifications} element={<Notifications />} />
           <Route path='*' element={<Navigate to={routes.student.root} />} />
         </Route>
       </Routes>

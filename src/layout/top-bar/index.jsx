@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import placeholder from "../../assets/icons/placeholder.png";
 import { logOut } from "../../services/http-services";
 import { toast } from "react-toastify";
+import Notifications from "../../container/students/notifications";
 
 const TopBar = () => {
   const [profile, setProfile] = useState(false);
   const { user, settings } = useSelector((state) => state);
-  console.log("🚀 ~ file: index.jsx ~ line 14 ~ TopBar ~ user", user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +37,10 @@ const TopBar = () => {
       <div className='hidden lg:flex w-full pr-6'>
         <div className='w-full flex items-center pl-8 justify-end'>
           <div className='h-full w-20 flex items-center justify-center border-r mr-4'>
-            <div className='relative cursor-pointer text-gray-600'>
+            <div
+              className='relative cursor-pointer text-gray-600'
+              onClick={() => dispatch(settingsSlice.actions.notificationCollapsed())}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='icon icon-tabler icon-tabler-bell'
@@ -167,6 +170,7 @@ const TopBar = () => {
           </svg>
         )}
       </div>
+      {settings.notification ? <Notifications /> : null}
     </nav>
   );
 };

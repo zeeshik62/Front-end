@@ -4,6 +4,7 @@ import { getAllStudents, sendRequestToTeam } from "../../../services/http-servic
 import AsyncSelect from "react-select/async";
 import makeAnimated from "react-select/animated";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 const AddTeamMembers = ({ modalHandler }) => {
   const [studentList, setStudentList] = useState([]);
@@ -13,26 +14,28 @@ const AddTeamMembers = ({ modalHandler }) => {
   const animatedComponents = makeAnimated();
 
   const loadOptions = async () => {
-    const res = await fetch(`http://localhost:4000/students`);
-    let data = await res.json();
-    return data._students.filter((el) => el._id !== user._id);
-  };
-  const handleInputChange = (params) => {
-    setValue(params);
+    try {
+      const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}students`);
+      return data._students.filter((el) => el._id !== user._id);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
-  // handle selection
-  const handleChange = (params) => {
-    setSelectedValue(params);
-  };
   const handleSubmit = () => {
     try {
-      if (!selectedValue.length) toast.error("Please choose your team first!");
+      if (!selectedValue.length) toast.warn("Please choose your team first!");
       else {
         sendRequestToTeam({
-          values: { teamMakerName: user?._id, teamMembers: selectedValue },
-          cbSuccess: () => {
-            toast.success("Request sent to your team!");
+          values: {
+            teamMakerName: user?._id,
+            teamMembers: selectedValue.map((el) => {
+              return { id: el._id, status: false };
+            }),
+          },
+          cbSuccess: ({ message }) => {
+            toast.success(message);
+            modalHandler();
           },
           cbFailure: (error) => {
             toast.error(error);
@@ -89,8 +92,7 @@ const AddTeamMembers = ({ modalHandler }) => {
               getOptionLabel={(e) => e.rollNum}
               getOptionValue={(e) => e.rollNum}
               loadOptions={loadOptions}
-              onInputChange={handleInputChange}
-              onChange={handleChange}
+              onChange={(params) => setSelectedValue(params)}
             />
           </div>
           <div className='flex items-center justify-start w-full'>

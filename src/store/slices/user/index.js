@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // Define the initial state
 const initialState = {
-    user: null
+    user: null,
+    teamId: null
 }
 
 // Delivery Changes slice
@@ -16,6 +17,10 @@ export const slice = createSlice({
         },
         currentUser: (state) => {
             return state.user
+        },
+        setTeamId: (state, action) => {
+            state.teamId = action.payload;
+            return state
         },
         resetUser: () => initialState
     }

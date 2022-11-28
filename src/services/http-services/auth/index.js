@@ -5,7 +5,7 @@ import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 export const register = async ({ values, cbSuccess, cbFailure }) => {
     try {
         let { email, password, userType } = values
-        const { user } = await createUserWithEmailAndPassword(auth, email, password)
+        await createUserWithEmailAndPassword(auth, email, password)
         const { data } = await httpClient.post(`${getApiURL(userType)}/register`, values)
         cbSuccess(data)
     } catch (error) {
@@ -16,8 +16,7 @@ export const register = async ({ values, cbSuccess, cbFailure }) => {
 export const login = async ({ values, cbSuccess, cbFailure }) => {
     try {
         let { email, password, userType } = values
-        console.log("🚀 ~ file: index.js ~ line 19 ~ login ~ userType", userType)
-        const { user } = await signInWithEmailAndPassword(auth, email, password)
+        await signInWithEmailAndPassword(auth, email, password)
         const { data } = await httpClient.post(`${getApiURL(userType)}/login`, values)
         cbSuccess(data)
     } catch (error) {

@@ -31,14 +31,48 @@ export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
         cbFailure(e.message);
     }
 };
+
+export const applyProject = async ({ values, cbSuccess, cbFailure }) => {
+    try {
+        const { data: teamData } = await httpClient.get('teams/get-team', { params: { id: values.userId } })
+        let value = { ...values, teamId: teamData.teamData[0].teamId }
+        const { data } = await httpClient.post("projects/apply-project", value)
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+
+export const getApplyProject = async ({ values, cbSuccess, cbFailure }) => {
+    try {
+        const { data } = await httpClient.post("projects/apply-project", values)
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
 export const fileURL = async ({ values, cbSuccess, cbFailure }) => {
+    try {
+        let { project, userId: id } = values;
+        const storageRef = ref(storage, `projectDocuments/${project.imagePath}`)
+        // await uploadBytes(storageRef, fileList)
+        let imageSrc = await getDownloadURL(storageRef)
+        const { data } = await httpClient.get("teams/get-team/", { params: { id } })
+        const { data: projectData } = await httpClient.get("projects/apply-project", { params: { teamId: data.teamData[0].teamId, projectId: project._id } })
+        let _project = { ...values.project, imagePath: imageSrc, applied: projectData._project.projectId };
+        cbSuccess(_project, data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+export const getProjectInfo = async ({ values, cbSuccess, cbFailure }) => {
     try {
         let { imagePath } = values;
         const storageRef = ref(storage, `projectDocuments/${imagePath}`)
         // await uploadBytes(storageRef, fileList)
         let imageSrc = await getDownloadURL(storageRef)
-        let addValue = { ...values, imagePath: imageSrc };
-        cbSuccess(addValue);
+        let _project = { ...values, imagePath: imageSrc };
+        cbSuccess(_project);
     } catch (e) {
         cbFailure(e.message);
     }

@@ -1,3 +1,6 @@
+import { decode } from "../local-storage-items"
+import jwt_decode from "jwt-decode";
+
 export const routes = {
     usersCard: "/",
     login: "/login",
@@ -19,6 +22,7 @@ export const routes = {
         applyProjects: '/student/apply-project',
         studentViewProjects: '/student/student-view-projects/:id',
         teamMembers: '/student/team-members',
+        notifications: '/student/notifications',
     },
     hod: "/hod",
 
@@ -60,6 +64,10 @@ export const memoryStrings = {
     authorization: 'authorizationToken'
 }
 
+export const appConfig = {
+    appColor: '#818cf8'
+}
+
 
 export const niceBytes = (x) => {
     const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -69,4 +77,11 @@ export const niceBytes = (x) => {
         n = n / 1024;
     }
     return (n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]);
+}
+
+export const getUserFromLocal = () => {
+    if (decode(memoryStrings.authorization)) {
+        let _user = jwt_decode(decode(memoryStrings.authorization));
+        return _user
+    }
 }

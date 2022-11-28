@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     sideBarCollapsed: false,
     navCollapsed: false,
+    notification: false
 }
 
 // Delivery Changes slice
@@ -19,6 +20,10 @@ export const slice = createSlice({
             state.navCollapsed = !state.navCollapsed;
             return state;
         },
+        notificationCollapsed: (state) => {
+            state.notification = !state.notification;
+            return state
+        }
     }
 })
 

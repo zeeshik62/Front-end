@@ -11,7 +11,16 @@ export const getAllStudents = async ({ cbSuccess, cbFailure }) => {
 
 export const sendRequestToTeam = async ({ values, cbSuccess, cbFailure }) => {
     try {
-        const { data } = await httpClient.post('students/create-team', values)
+        const { data } = await httpClient.post('teams/create-team', values)
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+
+export const getTeam = async ({ id, cbSuccess, cbFailure }) => {
+    try {
+        const { data } = await httpClient.get('teams/get-team', { params: { id } })
         cbSuccess(data);
     } catch (e) {
         cbFailure(e.message);
