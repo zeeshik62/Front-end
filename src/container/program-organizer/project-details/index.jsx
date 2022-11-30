@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { AppLoader, NoContent } from "../../../components/common";
+import { AppLoader, ContainerLoader, NoContent } from "../../../components/common";
 import NoProjects from "../../../assets/img/no-projects.png";
 import { toast } from "react-toastify";
 import { getProjectInfo } from "../../../services/http-services/projects";
@@ -15,6 +15,7 @@ const ProjectDetails = () => {
 
   const [selectedProject, setSelectedProject] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,19 +24,22 @@ const ProjectDetails = () => {
   }, []);
 
   const getFileURL = () => {
+    setLoading(true);
     getProjectInfo({
       values: allProjects.find((el) => el._id == id),
       cbSuccess: (data) => {
         setSelectedProject(data);
+        setLoading(false);
       },
       cbFailure: (error) => {
         toast.error(error);
+        setLoading(false);
       },
     });
   };
 
   if (!allProjects) return <NoContent imgSrc={NoProjects} title='Something went wrong, try again' />;
-  if (!selectedProject) return <AppLoader />;
+  if (loading) return <ContainerLoader />;
 
   return (
     <div className='row h-100'>

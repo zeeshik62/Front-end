@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppLoader, NoContent } from "../../../components/common";
+import { ContainerLoader, NoContent } from "../../../components/common";
 import NoProjects from "../../../assets/img/no-projects.png";
 import { applyProject, fileURL } from "../../../services/http-services/projects/index";
 import { toast } from "react-toastify";
@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 import ShowFileMOdel from "../../../components/show-file-model";
 import ApplyProjectsModel from "../../../components/show-apply-model";
 import back from "../../../assets/icons/arrow-left.png";
-import "../../program-organizer/project-details/ProjectDetails.css";
 import { routes } from "../../../utils/config";
+import "../../program-organizer/project-details/ProjectDetails.css";
 
 const ProjectViewStudent = () => {
   const { showProject } = useSelector((state) => state.projects);
@@ -18,6 +18,7 @@ const ProjectViewStudent = () => {
   const [showApplyModel, setShowApplyModel] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [teamStatus, setTeamStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   let { id } = useParams();
 
@@ -27,32 +28,38 @@ const ProjectViewStudent = () => {
   }, []);
 
   const getFileURL = () => {
+    setLoading(true);
     fileURL({
       values: { project: showProject.find((el) => el._id == id), userId: user._id },
       cbSuccess: (_project, data) => {
         setSelectedProject(_project);
         setTeamStatus(data.teamStatus);
+        setLoading(false);
       },
       cbFailure: (error) => {
         toast.error(error);
+        setLoading(false);
       },
     });
   };
 
   const handleApply = () => {
+    setLoading(true);
     applyProject({
       values: { ...selectedProject, userId: user._id },
       cbSuccess: (data) => {
         getFileURL();
         toast.success(data.message);
+        setLoading(false);
       },
       cbFailure: (error) => {
         toast.error(error);
+        setLoading(false);
       },
     });
   };
   if (!showProject) return <NoContent imgSrc={NoProjects} title='Something went wrong, try again' />;
-  if (!selectedProject) return <AppLoader />;
+  if (loading) return <ContainerLoader />;
 
   return (
     <div className='row h-100'>

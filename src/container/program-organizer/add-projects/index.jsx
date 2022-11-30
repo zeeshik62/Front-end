@@ -7,12 +7,15 @@ import "./AddProjects.css";
 import FileUpload from "./file-upload";
 import { AddNewProject } from "../../../services/http-services/projects";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const AddProjects = () => {
   const [imageUri, setImageUri] = useState(null);
+  const { user } = useSelector((state) => state.user);
+
   const handleAddProject = (values, setSubmitting, resetForm) => {
     AddNewProject({
-      values: { ...values, fileList: imageUri },
+      values: { ...values, fileList: imageUri, userId: user._id },
       cbSuccess: () => {
         resetForm();
         setSubmitting(false);

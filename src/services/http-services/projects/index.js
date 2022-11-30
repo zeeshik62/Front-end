@@ -20,11 +20,11 @@ export const getProject = async ({ cbSuccess, cbFailure }) => {
 
 export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
     try {
-        let { fileList, projectDescription, projectName, stackName } = values;
+        let { fileList, projectDescription, projectName, stackName, userId } = values;
         const storageRef = ref(storage, `projectDocuments/${fileList.name}`)
         await uploadBytes(storageRef, fileList)
         // let imageSrc = await getDownloadURL(storageRef)
-        let addValue = { projectDescription, projectName, stackName, imageSrc: fileList.name };
+        let addValue = { projectDescription, projectName, stackName, imageSrc: fileList.name, userId };
         const { data } = await httpClient.post("projects/add-project", addValue)
         cbSuccess(data);
     } catch (e) {
@@ -59,7 +59,7 @@ export const fileURL = async ({ values, cbSuccess, cbFailure }) => {
         let imageSrc = await getDownloadURL(storageRef)
         const { data } = await httpClient.get("teams/get-team/", { params: { id } })
         const { data: projectData } = await httpClient.get("projects/apply-project", { params: { teamId: data.teamData[0].teamId, projectId: project._id } })
-        let _project = { ...values.project, imagePath: imageSrc, applied: projectData._project.projectId };
+        let _project = { ...values.project, imagePath: imageSrc, applied: projectData._project?.projectId };
         cbSuccess(_project, data);
     } catch (e) {
         cbFailure(e.message);

@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { getProject } from "../../../services/http-services/projects/index";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { slice as projectSlice } from "../../../store/slices/projects";
+import { ContainerLoader } from "../../../components/common";
 
 const ShowProjects = () => {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,16 +17,21 @@ const ShowProjects = () => {
   }, []);
 
   const getProjects = () => {
+    setLoading(true);
     getProject({
       cbSuccess: ({ projects }) => {
         dispatch(projectSlice.actions.showStudent(projects));
         setList(projects);
+        setLoading(false);
       },
       cbFailure: (error) => {
         toast.error(error);
+        setLoading(false);
       },
     });
   };
+
+  if (loading) return <ContainerLoader />;
 
   return (
     <div className='grid gap-2 lg:grid-cols-4'>

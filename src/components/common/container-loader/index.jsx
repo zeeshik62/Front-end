@@ -1,13 +1,13 @@
-import { ClipLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import { appConfig } from "../../../utils";
 
 const ContainerLoader = ({ loading }) => {
   return (
-    <div className='center-button'>
-      <ClipLoader
+    <div className='center-div'>
+      <HashLoader
         color={appConfig.appColor}
         loading={loading}
-        size={150}
+        size={120}
         aria-label='Loading Spinner'
         data-testid='loader'
       />
