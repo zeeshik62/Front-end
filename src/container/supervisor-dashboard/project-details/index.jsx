@@ -12,6 +12,7 @@ import back from "../../../assets/icons/arrow-left.png";
 const ProjectDetails = () => {
   let { id } = useParams();
   const { allProjects } = useSelector((state) => state.projects);
+  const { user } = useSelector((state) => state.user);
 
   const [selectedProject, setSelectedProject] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -76,9 +77,8 @@ const ProjectDetails = () => {
             <div>
               <h6>Supervisor</h6>
               <div className='footerItems shadow-lg'>
-                <p>
-                  {selectedProject?.supervisorName ? selectedProject?.supervisorName : "No supervisor name"}
-                </p>
+                <p>{user?.name ? user?.name : "No supervisor name"}</p>
+                <p>{user?.email ? user?.email : "No supervisor email"}</p>
               </div>
             </div>
             <div>

@@ -5,7 +5,13 @@ import SignIn from "../container/sign-in";
 import SignUp from "../container/sign-up";
 import Layout from "../layout";
 import { memoryStrings, routes } from "../utils/config";
-import { POAddProject, PODashboard, ProjectDetails, POProjects } from "../container/program-organizer";
+import {
+  POAddProject,
+  PODashboard,
+  ProjectDetails,
+  POProjects,
+  ProjectRequests,
+} from "../container/program-organizer";
 import LayoutStudent from "../layout/layout-student";
 import PSDashboard from "../container/students/dashboard";
 import ShowProjects from "../container/students/projects";
@@ -16,6 +22,13 @@ import Notifications from "../container/students/notifications";
 import { slice as userSlice } from "../store/slices/user";
 import jwt_decode from "jwt-decode";
 import { sls } from "../utils";
+import LayoutSupervisor from "../layout/layout-supervisor";
+import {
+  SupervisorDashboard,
+  SupervisorProjects,
+  SupervisorProjectDetails,
+  SupervisorRequests,
+} from "../container/supervisor-dashboard";
 
 const AppRoutes = ({ isAuthorized }) => {
   const dispatch = useDispatch();
@@ -38,7 +51,15 @@ const AppRoutes = ({ isAuthorized }) => {
           <Route path={routes.organizer.projects} element={<POProjects />} />
           <Route path={routes.organizer.addProject} element={<POAddProject />} />
           <Route path={routes.organizer.projectDetails} element={<ProjectDetails />} />
+          <Route path={routes.organizer.projectRequest} element={<ProjectRequests />} />
           <Route path='*' element={<Navigate to={routes.organizer.root} />} />
+        </Route>
+        <Route element={<LayoutSupervisor />}>
+          <Route path={routes.supervisor.root} element={<SupervisorDashboard />} />
+          <Route path={routes.supervisor.projects} element={<SupervisorProjects />} />
+          <Route path={routes.supervisor.projectDetails} element={<SupervisorProjectDetails />} />
+          <Route path={routes.supervisor.projectRequest} element={<SupervisorRequests />} />
+          <Route path='*' element={<Navigate to={routes.supervisor.root} />} />
         </Route>
         <Route element={<LayoutStudent />}>
           <Route path={routes.student.root} element={<PSDashboard />} />

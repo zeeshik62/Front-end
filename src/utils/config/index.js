@@ -5,7 +5,12 @@ export const routes = {
     usersCard: "/",
     login: "/login",
     register: "/register",
-    supervisor: "/supervisor",
+    supervisor: {
+        root: "/supervisor",
+        projects: '/supervisor/projects',
+        projectDetails: '/supervisor/projects/:id',
+        projectRequest: '/supervisor/requests',
+    },
     organizer: {
         root: "/program-organizer",
         projects: '/program-organizer/projects',
@@ -13,6 +18,7 @@ export const routes = {
         addProject: '/program-organizer/add-project',
         addStudent: '/program-organizer/add-students',
         projectDetails: '/program-organizer/projects/:id',
+        projectRequest: '/program-organizer/requests',
 
     },
     student: {
@@ -43,7 +49,7 @@ export const getURL = (argument) => {
     const userTypes = {
         "Head Of Department": routes.hod,
         "Program Organizer": routes.organizer.root,
-        "Supervisor": routes.supervisor,
+        "Supervisor": routes.supervisor.root,
         "Student": routes.student.root
     }
     return userTypes[argument]

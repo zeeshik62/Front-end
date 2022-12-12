@@ -18,6 +18,15 @@ export const getProject = async ({ cbSuccess, cbFailure }) => {
     }
 };
 
+export const allSupervisors = async ({ cbSuccess, cbFailure }) => {
+    try {
+        const { data } = await httpClient.get('supervisors/')
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+
 export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
     try {
         let { fileList, projectDescription, projectName, stackName, userId } = values;
@@ -73,6 +82,14 @@ export const getProjectInfo = async ({ values, cbSuccess, cbFailure }) => {
         let imageSrc = await getDownloadURL(storageRef)
         let _project = { ...values, imagePath: imageSrc };
         cbSuccess(_project);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+export const getProjectRequests = async ({ userId, cbSuccess, cbFailure }) => {
+    try {
+        const { data } = await httpClient.get("supervisors/requests", { params: { userId } })
+        cbSuccess(data);
     } catch (e) {
         cbFailure(e.message);
     }

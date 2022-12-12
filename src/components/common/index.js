@@ -1,4 +1,5 @@
 export { default as AppLoader } from './app-loader'
+export { default as AppProgressBar } from './app-progress-bar'
 export { default as ContainerLoader } from './container-loader'
 export { default as Dropdown } from './drop-down'
 export { default as FormButton } from './form-button'

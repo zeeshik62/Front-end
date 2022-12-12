@@ -3,14 +3,12 @@ import team1 from "../../../assets/icons/team-1.jpg";
 import team2 from "../../../assets/icons/team-2.jpg";
 import team3 from "../../../assets/icons/team-3.jpg";
 import team4 from "../../../assets/icons/team-4.jpg";
-import { AppProgressBar } from "../../../components/common";
 
-const PSDashboard = () => {
+const SupervisorDashboard = () => {
   return (
     <div>
-      {/* <h1>Student Dashboard</h1> */}
+      <h1>Dashboard</h1>
       <div className='w-full px-6 mx-auto'>
-        <AppProgressBar firstBar='100%' secondBar='100%' thirdBar='0%' fullBar='0%' />
         <div className='flex flex-wrap -mx-3'>
           <div className='w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4'>
             <div className='relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border'>
@@ -762,4 +760,4 @@ const PSDashboard = () => {
   );
 };
 
-export default PSDashboard;
+export default SupervisorDashboard;

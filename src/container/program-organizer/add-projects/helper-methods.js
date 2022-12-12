@@ -4,6 +4,9 @@ export const options = [
     { value: "IOS", label: "IOS" },
     { value: "WEB_APP", label: "Web Application" },
 ];
+export const makeSupervisor = (array) => {
+    return array.map(el => { return { value: el.name, label: el.name } })
+}
 
 export const getPhoto = ({ state, setImageUri, setState }) => (e) => {
     e.preventDefault();

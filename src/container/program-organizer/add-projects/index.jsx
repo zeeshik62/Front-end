@@ -1,17 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { Dropdown, FormButton, InputField } from "../../../components/common";
 import { validationSchema } from "./validationSchema";
-import { options } from "./helper-methods";
+import { makeSupervisor, options } from "./helper-methods";
 import "./AddProjects.css";
 import FileUpload from "./file-upload";
-import { AddNewProject } from "../../../services/http-services/projects";
+import { AddNewProject, allSupervisors } from "../../../services/http-services/projects";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 const AddProjects = () => {
   const [imageUri, setImageUri] = useState(null);
+  const [supervisors, setSupervisors] = useState([]);
   const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    getSupervisors();
+  }, []);
+
+  const getSupervisors = () => {
+    allSupervisors({
+      cbSuccess: ({ _supervisor, message }) => {
+        setSupervisors(makeSupervisor(_supervisor));
+      },
+      cbFailure: (error) => {
+        toast.error(error.message);
+      },
+    });
+  };
 
   const handleAddProject = (values, setSubmitting, resetForm) => {
     AddNewProject({
@@ -36,6 +52,7 @@ const AddProjects = () => {
             initialValues={{
               projectName: "",
               stackName: "",
+              supervisorName: "",
               projectDescription: "",
             }}
             validationSchema={validationSchema}
@@ -73,6 +90,15 @@ const AddProjects = () => {
                   {/* <ImageInput getPhoto={getPhoto({ state, setImageUri, setState })} image={imageUri} /> */}
                   <FileUpload imageFile={(e) => setImageUri(e)} />
                 </div>
+                <Dropdown
+                  asterisk={true}
+                  dName='des'
+                  name='supervisorName'
+                  multiSelect={false}
+                  handleChange={handleChange("supervisorName")}
+                  options={supervisors}
+                  title='Select supervisor name'
+                />
 
                 <div
                   className='wrap-input100 validate-input bg0 rs1-alert-validate'

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { slice as projectSlice } from "../../../store/slices/projects";
 import { useDispatch, useSelector } from "react-redux";
 
-const POProjects = () => {
+const SupervisorProjects = () => {
   const { allProjects } = useSelector((state) => state.projects);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +34,6 @@ const POProjects = () => {
   };
 
   if (loading) return <ContainerLoader />;
-
   return (
     <div className='flex flex-col sm:-mx-6 lg:-mx-8'>
       <div className='py-2 inline-block min-w-full sm:px-6 lg:px-8'>
@@ -78,7 +77,7 @@ const POProjects = () => {
                   </p>
                   <div className='text-right'>
                     <button
-                      onClick={() => navigate(`/program-organizer/projects/${project._id}`)}
+                      onClick={() => navigate(`/supervisor/projects/${project._id}`)}
                       className='view-details-btn'
                     >
                       View details
@@ -96,4 +95,4 @@ const POProjects = () => {
   );
 };
 
-export default POProjects;
+export default SupervisorProjects;
