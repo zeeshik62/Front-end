@@ -47,6 +47,7 @@ const SignUp = () => {
         setLoading(false);
       },
       cbFailure: (error) => {
+        console.log("🚀 ~ file: index.jsx:50 ~ handleRegister ~ error", error);
         toast.error(error);
         setLoading(false);
       },

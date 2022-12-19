@@ -7,12 +7,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { slice as projectSlice } from "../../../store/slices/projects";
 import { useDispatch, useSelector } from "react-redux";
+import { AppRefreshButton } from "../../../components/common";
 
 const POProjects = () => {
   const { allProjects } = useSelector((state) => state.projects);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (allProjects.length == 0) getProjects();
@@ -92,6 +93,7 @@ const POProjects = () => {
           <NoContent imgSrc={NoProjects} title='Your added projects will appear here' />
         )}
       </div>
+      <AppRefreshButton icon='fa-refresh' onPress={getProjects} />
     </div>
   );
 };

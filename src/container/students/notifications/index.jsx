@@ -99,7 +99,7 @@ const Notifications = () => {
             {loading ? <ContainerLoader loading={loading} /> : null}
             {notificationList.length > 0 ? (
               notificationList.map((el) => (
-                <>
+                <div key={el._id}>
                   <div className='px-8 py-8'>
                     <div className='flex justify-between w-full'>
                       <p className='text-xs sm:text-base font-bold leading-tight text-white capitalize'>
@@ -139,7 +139,7 @@ const Notifications = () => {
                     </div>
                   </div>
                   <div className='opacity-50 w-full h-0.5 border border-gray-900' />
-                </>
+                </div>
               ))
             ) : (
               <p className='text-white mt-8'>No notifications!</p>

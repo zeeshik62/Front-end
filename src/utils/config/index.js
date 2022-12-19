@@ -10,6 +10,8 @@ export const routes = {
         projects: '/supervisor/projects',
         projectDetails: '/supervisor/projects/:id',
         projectRequest: '/supervisor/requests',
+        chat: '/supervisor/chat',
+        announcement: '/student/announcement',
     },
     organizer: {
         root: "/program-organizer",
@@ -19,6 +21,7 @@ export const routes = {
         addStudent: '/program-organizer/add-students',
         projectDetails: '/program-organizer/projects/:id',
         projectRequest: '/program-organizer/requests',
+        announcement: '/program-organizer/announcement',
 
     },
     student: {
@@ -29,8 +32,13 @@ export const routes = {
         studentViewProjects: '/student/student-view-projects/:id',
         teamMembers: '/student/team-members',
         notifications: '/student/notifications',
+        chat: '/student/chat',
+        announcement: '/student/announcement',
     },
-    hod: "/hod",
+    hod: {
+        root: '/hod',
+        dashboard: '/hod/dashboard',
+    },
 
 }
 
@@ -47,7 +55,7 @@ export const currentUser = (argument) => {
 
 export const getURL = (argument) => {
     const userTypes = {
-        "Head Of Department": routes.hod,
+        "Head Of Department": routes.hod.root,
         "Program Organizer": routes.organizer.root,
         "Supervisor": routes.supervisor.root,
         "Student": routes.student.root
@@ -58,7 +66,7 @@ export const getURL = (argument) => {
 
 export const getApiURL = (argument) => {
     const userTypes = {
-        "Head Of Department": routes.hod,
+        "Head Of Department": "/hod",
         "Program Organizer": "/program-organizers",
         "Supervisor": "/supervisors",
         "Student": "/students"
@@ -91,3 +99,9 @@ export const getUserFromLocal = () => {
         return _user
     }
 }
+
+export const getBadgeClasses = () => {
+    let classes = "mr-2 border rounded mb-1 px-2 py-1 bg-";
+    let colors = ["red", "amber", "lime", "emerald", "sky", "rose"];
+    return classes + colors[Math.floor(Math.random() * colors.length)];
+};

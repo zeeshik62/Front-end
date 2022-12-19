@@ -8,6 +8,7 @@ import { auth, onAuthStateChanged } from "./services/firebase-config";
 
 function App() {
   const [isAuthorized, setIsAuthorized] = useState(null);
+
   useEffect(() => {
     authListener();
   }, []);

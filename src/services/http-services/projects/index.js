@@ -29,15 +29,15 @@ export const allSupervisors = async ({ cbSuccess, cbFailure }) => {
 
 export const AddNewProject = async ({ values, cbSuccess, cbFailure }) => {
     try {
-        let { fileList, projectDescription, projectName, stackName, userId } = values;
+        let { fileList, projectDescription, projectName, stackName, supervisorName, supervisorId, userId } = values;
         const storageRef = ref(storage, `projectDocuments/${fileList.name}`)
         await uploadBytes(storageRef, fileList)
         // let imageSrc = await getDownloadURL(storageRef)
-        let addValue = { projectDescription, projectName, stackName, imageSrc: fileList.name, userId };
+        let addValue = { projectDescription, projectName, stackName, supervisorName, supervisorId, imageSrc: fileList.name, userId };
         const { data } = await httpClient.post("projects/add-project", addValue)
         cbSuccess(data);
     } catch (e) {
-        cbFailure(e.message);
+        cbFailure(e);
     }
 };
 
@@ -89,6 +89,15 @@ export const getProjectInfo = async ({ values, cbSuccess, cbFailure }) => {
 export const getProjectRequests = async ({ userId, cbSuccess, cbFailure }) => {
     try {
         const { data } = await httpClient.get("supervisors/requests", { params: { userId } })
+        cbSuccess(data);
+    } catch (e) {
+        cbFailure(e.message);
+    }
+};
+export const updateStage = async ({ values, cbSuccess, cbFailure }) => {
+
+    try {
+        const { data } = await httpClient.put("supervisors/update-stage", { params: { values } })
         cbSuccess(data);
     } catch (e) {
         cbFailure(e.message);

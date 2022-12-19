@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Formik } from "formik";
 import { Dropdown, FormButton, InputField } from "../../../components/common";
 import { validationSchema } from "./validationSchema";
@@ -13,8 +13,11 @@ const AddProjects = () => {
   const [imageUri, setImageUri] = useState(null);
   const [supervisors, setSupervisors] = useState([]);
   const { user } = useSelector((state) => state.user);
+  const dataFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     getSupervisors();
   }, []);
 
@@ -30,8 +33,9 @@ const AddProjects = () => {
   };
 
   const handleAddProject = (values, setSubmitting, resetForm) => {
+    let supervisorId = supervisors.find((el) => el.label === values.supervisorName).id;
     AddNewProject({
-      values: { ...values, fileList: imageUri, userId: user._id },
+      values: { ...values, supervisorId, fileList: imageUri, userId: user._id },
       cbSuccess: () => {
         resetForm();
         setSubmitting(false);
@@ -39,7 +43,8 @@ const AddProjects = () => {
         toast.success("project added");
       },
       cbFailure: (error) => {
-        toast.error(error.message);
+        toast.error(error.response?.data?.error);
+        setSubmitting(false);
       },
     });
   };
@@ -79,7 +84,7 @@ const AddProjects = () => {
                 <div className='grid grid-cols-2 w-full gap-4'>
                   <Dropdown
                     asterisk={true}
-                    dName='des'
+                    dName='stackName'
                     name='stackName'
                     multiSelect={false}
                     handleChange={handleChange("stackName")}
@@ -92,7 +97,7 @@ const AddProjects = () => {
                 </div>
                 <Dropdown
                   asterisk={true}
-                  dName='des'
+                  dName='supervisorName'
                   name='supervisorName'
                   multiSelect={false}
                   handleChange={handleChange("supervisorName")}

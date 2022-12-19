@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { slice as projectSlice } from "../../../store/slices/projects";
 import { useDispatch, useSelector } from "react-redux";
+import { AppRefreshButton } from "../../../components/common";
 
 const SupervisorProjects = () => {
   const { allProjects } = useSelector((state) => state.projects);
@@ -55,19 +56,20 @@ const SupervisorProjects = () => {
                   <p className='description-text p-0 m-0'>
                     <strong>Team:</strong>
                   </p>
-                  <ScrollContainer style={{ cursor: "grab" }}>
-                    <div className='flex p-0 m-0'>
-                      {project.developers ? (
-                        project.developers.map(({ developerName }, i) => (
-                          <div className='px-3 m-1 rounded border'>
+                  {project.teamsData ? (
+                    <ScrollContainer style={{ cursor: "grab" }}>
+                      <div className='flex'>
+                        {project.teamsData.map((developerName) => (
+                          <div className='px-3 m-1 rounded border' key={developerName}>
                             <p className='p-0 m-0'>{developerName}</p>
                           </div>
-                        ))
-                      ) : (
-                        <p>not assigned yet</p>
-                      )}
-                    </div>
-                  </ScrollContainer>
+                        ))}
+                      </div>
+                    </ScrollContainer>
+                  ) : (
+                    <p>not assigned yet</p>
+                  )}
+
                   <p className='description-text my-2'>
                     <strong> Description:</strong> {project.description}
                   </p>
@@ -91,6 +93,7 @@ const SupervisorProjects = () => {
           <NoContent imgSrc={NoProjects} title='Your added projects will appear here' />
         )}
       </div>
+      <AppRefreshButton icon='fa-refresh' onPress={getProjects} />
     </div>
   );
 };

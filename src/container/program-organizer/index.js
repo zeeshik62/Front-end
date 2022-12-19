@@ -1,3 +1,4 @@
+export { default as Announcement } from './announcement'
 export { default as POAddProject } from './add-projects'
 export { default as PODashboard } from './dashboard'
 export { default as ProjectDetails } from './project-details'

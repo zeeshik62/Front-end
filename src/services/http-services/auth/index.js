@@ -26,6 +26,7 @@ export const login = async ({ values, cbSuccess, cbFailure }) => {
 
 export const logOut = async ({ cbSuccess, cbFailure }) => {
     try {
+        //firebase signout 
         await signOut(auth)
         sls.remove(memoryStrings.authorization)
         cbSuccess()

@@ -62,7 +62,7 @@ export const sidebarData = [
 
     },
     {
-        id: 4, title: 'Requests', path: '/program-organizer/requests', icon: <svg
+        id: 4, title: 'Announcement', path: '/program-organizer/announcement', icon: <svg
             xmlns='http://www.w3.org/2000/svg'
             className='icon icon-tabler icon-tabler-code'
             width={20}

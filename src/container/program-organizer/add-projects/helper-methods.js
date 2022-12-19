@@ -5,7 +5,12 @@ export const options = [
     { value: "WEB_APP", label: "Web Application" },
 ];
 export const makeSupervisor = (array) => {
-    return array.map(el => { return { value: el.name, label: el.name } })
+    return array.map(el => { return { id: el._id, value: el.name, label: el.name } })
+}
+export const makeStudents = (array) => {
+    let arr = array.map(el => { return { id: el._id, value: el.section, label: el.section } })
+    return arr.filter((v, i, a) => a.findIndex(v2 => (v2.value === v.value)) === i)
+
 }
 
 export const getPhoto = ({ state, setImageUri, setState }) => (e) => {

@@ -8,6 +8,7 @@ import { getProjectInfo } from "../../../services/http-services/projects";
 import { ShowFileModel } from "../../../components";
 import "./ProjectDetails.css";
 import back from "../../../assets/icons/arrow-left.png";
+import { useRef } from "react";
 
 const ProjectDetails = () => {
   let { id } = useParams();
@@ -17,9 +18,11 @@ const ProjectDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dataFetchRef = useRef(false);
 
   useEffect(() => {
-    // setSelectedProject(allProjects.find((el) => el._id == id));
+    if (dataFetchRef.current) return;
+    dataFetchRef.current = true;
     getFileURL();
   }, []);
 
@@ -82,10 +85,9 @@ const ProjectDetails = () => {
               </div>
             </div>
             <div>
-              <h6>Developers</h6>
+              <h6>Team</h6>
               <div className='footerItems shadow-lg'>
                 <p>{selectedProject?.clientName ? selectedProject?.clientName : "No Developers name"}</p>
-                <p>{selectedProject?.clientEmail ? selectedProject?.clientEmail : "No Developers email"}</p>
               </div>
             </div>
           </div>

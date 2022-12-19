@@ -31,6 +31,7 @@ const SignIn = () => {
     login({
       values: data,
       cbSuccess: (data) => {
+        console.log(data);
         let decodedUser = jwt_decode(data.token);
         sls.encode(memoryStrings.authorization, data.token);
         dispatch(userSlice.actions.user(decodedUser));

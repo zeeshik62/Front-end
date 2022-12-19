@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { getAllStudents, sendRequestToTeam } from "../../../services/http-services/students";
+import { sendRequestToTeam } from "../../../services/http-services/students";
 import AsyncSelect from "react-select/async";
 import makeAnimated from "react-select/animated";
 import { useSelector } from "react-redux";

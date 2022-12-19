@@ -6,6 +6,7 @@ import SignUp from "../container/sign-up";
 import Layout from "../layout";
 import { memoryStrings, routes } from "../utils/config";
 import {
+  Announcement,
   POAddProject,
   PODashboard,
   ProjectDetails,
@@ -13,12 +14,6 @@ import {
   ProjectRequests,
 } from "../container/program-organizer";
 import LayoutStudent from "../layout/layout-student";
-import PSDashboard from "../container/students/dashboard";
-import ShowProjects from "../container/students/projects";
-import ApplyProjects from "../container/students/apply-projects";
-import ProjectViewStudent from "../container/students/project-view-Student";
-import TeamMembers from "../container/students/teams";
-import Notifications from "../container/students/notifications";
 import { slice as userSlice } from "../store/slices/user";
 import jwt_decode from "jwt-decode";
 import { sls } from "../utils";
@@ -28,7 +23,20 @@ import {
   SupervisorProjects,
   SupervisorProjectDetails,
   SupervisorRequests,
-} from "../container/supervisor-dashboard";
+} from "../container/supervisor";
+import {
+  ApplyProjects,
+  Notifications,
+  ProjectViewStudent,
+  PSDashboard,
+  ShowProjects,
+  StudentAnnouncement,
+  StudentChat,
+  TeamMembers,
+} from "../container/students";
+import SupervisorChat from "../container/supervisor/chat";
+import LayoutHod from "../layout/layout-hod";
+import HodDashboard from "../container/hod-dashboard";
 
 const AppRoutes = ({ isAuthorized }) => {
   const dispatch = useDispatch();
@@ -36,6 +44,7 @@ const AppRoutes = ({ isAuthorized }) => {
     if (sls.decode(memoryStrings.authorization)) {
       let _user = jwt_decode(sls.decode(memoryStrings.authorization));
       dispatch(userSlice.actions.user(_user));
+      dispatch(userSlice.actions.setCurrentUser(isAuthorized.uid));
     }
   }
   return (
@@ -46,12 +55,17 @@ const AppRoutes = ({ isAuthorized }) => {
         <Route path={routes.register} element={<SignUp />} />
         <Route path='*' element={<Navigate to={routes.usersCard} />} />
 
+        <Route element={<LayoutHod />}>
+          <Route path={routes.hod.root} element={<HodDashboard />} />
+          <Route path='*' element={<Navigate to={routes.hod.root} />} />
+        </Route>
         <Route element={<Layout />}>
           <Route path={routes.organizer.root} element={<PODashboard />} />
           <Route path={routes.organizer.projects} element={<POProjects />} />
           <Route path={routes.organizer.addProject} element={<POAddProject />} />
           <Route path={routes.organizer.projectDetails} element={<ProjectDetails />} />
           <Route path={routes.organizer.projectRequest} element={<ProjectRequests />} />
+          <Route path={routes.organizer.announcement} element={<Announcement />} />
           <Route path='*' element={<Navigate to={routes.organizer.root} />} />
         </Route>
         <Route element={<LayoutSupervisor />}>
@@ -59,6 +73,7 @@ const AppRoutes = ({ isAuthorized }) => {
           <Route path={routes.supervisor.projects} element={<SupervisorProjects />} />
           <Route path={routes.supervisor.projectDetails} element={<SupervisorProjectDetails />} />
           <Route path={routes.supervisor.projectRequest} element={<SupervisorRequests />} />
+          <Route path={routes.supervisor.chat} element={<SupervisorChat />} />
           <Route path='*' element={<Navigate to={routes.supervisor.root} />} />
         </Route>
         <Route element={<LayoutStudent />}>
@@ -68,6 +83,8 @@ const AppRoutes = ({ isAuthorized }) => {
           <Route path={routes.student.studentViewProjects} element={<ProjectViewStudent />} />
           <Route path={routes.student.teamMembers} element={<TeamMembers />} />
           <Route path={routes.student.notifications} element={<Notifications />} />
+          <Route path={routes.student.chat} element={<StudentChat />} />
+          <Route path={routes.student.announcement} element={<StudentAnnouncement />} />
           <Route path='*' element={<Navigate to={routes.student.root} />} />
         </Route>
       </Routes>

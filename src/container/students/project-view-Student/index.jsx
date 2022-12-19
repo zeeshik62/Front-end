@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ContainerLoader, NoContent } from "../../../components/common";
 import NoProjects from "../../../assets/img/no-projects.png";
@@ -19,11 +19,14 @@ const ProjectViewStudent = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [teamStatus, setTeamStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const dataFetchRef = useRef(false);
   const navigate = useNavigate();
   let { id } = useParams();
 
   useEffect(() => {
     // setSelectedProject(allProjects.find((el) => el._id == id));
+    if (dataFetchRef.current) return;
+    dataFetchRef.current = true;
     getFileURL();
   }, []);
 
@@ -80,36 +83,6 @@ const ProjectViewStudent = () => {
               {selectedProject?.description ? selectedProject?.description : "No description available"}
             </h4>
           </div>
-          {/* <div className='cardFooter'>
-            <div>
-            <h6>Developer</h6>
-            <div className='footerItems'>
-              {selectedProject?.developers?.length !== 0 &&
-                selectedProject?.developers.map((developer) => (
-                  <Fragment key={developer.email}>
-                    <p>{developer.name}</p>
-                    <p>{developer.email}</p>
-                  </Fragment>
-                ))}
-            </div>
-          </div>
-            <div>
-              <h6>Supervisor</h6>
-              <div className='footerItems shadow-lg'>
-                <p>{selectedProject?.teamLeadName ? selectedProject?.teamLeadName : "No supervisor name"}</p>
-                <p>
-                  {selectedProject?.teamLeadEmail ? selectedProject?.teamLeadEmail : "No supervisor email"}
-                </p>
-              </div>
-            </div>
-            <div>
-              <h6>Developers</h6>
-              <div className='footerItems shadow-lg'>
-                <p>{selectedProject?.clientName ? selectedProject?.clientName : "No Developers name"}</p>
-                <p>{selectedProject?.clientEmail ? selectedProject?.clientEmail : "No Developers email"}</p>
-              </div>
-            </div>
-          </div> */}
           <div className='w-full'>
             <div className='imageInput'>
               <i
